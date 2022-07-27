@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: config_demo
+  config:
+    import: summer-cloud:${spring.application.name}.yaml
+summer:
+  cloud:
+    config:
+      url: http://localhost:1106
