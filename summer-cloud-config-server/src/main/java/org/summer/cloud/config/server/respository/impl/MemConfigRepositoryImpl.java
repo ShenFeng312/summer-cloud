@@ -1,12 +1,12 @@
 package org.summer.cloud.config.server.respository.impl;
 
 import org.springframework.stereotype.Repository;
-import org.summer.cloud.config.server.entity.ConfigEntity;
-import org.summer.cloud.config.server.respository.ConfigRepository;
+import org.summer.cloud.common.entity.ConfigEntity;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.summer.cloud.config.server.respository.ConfigRepository;
 
 
 /**
@@ -20,18 +20,17 @@ public class MemConfigRepositoryImpl implements ConfigRepository {
     private final Map<String, AtomicInteger> versionMap = new ConcurrentHashMap<>();
 
     @Override
-    public String getConfig(String fileName) {
-        ConfigEntity configEntity = configEntityMap.get(fileName);
-        if (configEntity == null) {
-            return "";
-        }
-        return configEntity.getConfig();
+    public ConfigEntity getConfig(String fileName) {
+        return configEntityMap.get(fileName);
     }
 
     @Override
     public void save(String fileName, String config) {
-        int newVersion = getNewVersion(fileName);
-        ConfigEntity configEntity = ConfigEntity.builder().config(config).version(newVersion).build();
+        ConfigEntity configEntity = ConfigEntity.builder()
+                .config(config)
+                .version(getNewVersion(fileName))
+                .fileName(fileName)
+                .build();
         configEntityMap.put(fileName, configEntity);
     }
 

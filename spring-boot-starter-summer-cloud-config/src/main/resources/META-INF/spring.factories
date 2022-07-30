@@ -3,6 +3,10 @@
 org.springframework.boot.context.config.ConfigDataLocationResolver=\
 org.summer.cloud.config.SummerCloudConfigDataLocationResolver
 
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.summer.cloud.config.SummerCloudConfigAutoConfiguration
+
 # ConfigData Loaders
 org.springframework.boot.context.config.ConfigDataLoader=\
 org.summer.cloud.config.SummerCloudConfigDataLoader

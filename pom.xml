@@ -26,10 +26,9 @@
     </dependencyManagement>
 
     <modules>
-        <module>
-            summer-cloud-config-server
-        </module>
+        <module>summer-cloud-config-server</module>
         <module>spring-boot-starter-summer-cloud-config</module>
+        <module>summer-cloud-common</module>
     </modules>
 
 

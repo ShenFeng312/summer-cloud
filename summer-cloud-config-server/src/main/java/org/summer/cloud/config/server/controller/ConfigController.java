@@ -1,6 +1,7 @@
 package org.summer.cloud.config.server.controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.summer.cloud.common.entity.ConfigEntity;
 import org.summer.cloud.config.server.respository.ConfigRepository;
 
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ public class ConfigController {
     private ConfigRepository configRepository;
 
     @GetMapping("/config/{fileName}")
-    public String config(@PathVariable String fileName) {
+    public ConfigEntity config(@PathVariable String fileName) {
         return configRepository.getConfig(fileName);
     }
 

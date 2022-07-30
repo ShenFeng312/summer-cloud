@@ -1,5 +1,8 @@
 package org.summer.cloud.config.server.respository;
 
+
+import org.summer.cloud.common.entity.ConfigEntity;
+
 /**
  * @author shenfeng
  */
@@ -10,7 +13,7 @@ public interface ConfigRepository {
      * @param fileName fileName
      * @return config
      */
-    String getConfig(String fileName);
+    ConfigEntity getConfig(String fileName);
 
     /**
      * save config

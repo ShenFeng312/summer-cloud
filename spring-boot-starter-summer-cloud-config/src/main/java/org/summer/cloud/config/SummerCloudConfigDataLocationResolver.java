@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.bind.BindHandler;
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.summer.cloud.config.client.SummerCloudConfigClient;
+import org.summer.cloud.config.client.SummerCloudConfigClientFactory;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class SummerCloudConfigDataLocationResolver implements ConfigDataLocation
         ConfigurableBootstrapContext bootstrapContext = context.getBootstrapContext();
         if (!bootstrapContext.isRegistered(SummerCloudConfigClient.class)) {
             bootstrapContext.register(SummerCloudConfigClient.class,
-                    context1 -> new SummerCloudConfigClient(summerCloudConfigProperties));
+                    c -> SummerCloudConfigClientFactory.build(summerCloudConfigProperties));
         }
 
 
