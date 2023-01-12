@@ -1,5 +1,6 @@
 package org.summer.cloud.config;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.config.ConfigDataResource;
@@ -9,6 +10,7 @@ import org.springframework.boot.context.config.ConfigDataResource;
  */
 @Getter
 @Setter
-public class SummerCloudConfigDataResource extends ConfigDataResource {
+@EqualsAndHashCode
+public class    SummerCloudConfigDataResource extends ConfigDataResource {
     private String fileName;
 }

@@ -12,6 +12,7 @@ import org.summer.cloud.config.client.SummerCloudConfigClient;
 import org.summer.cloud.config.refresh.SummerCloudRefresher;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import static org.summer.cloud.config.refresh.LoaderUtils.getConfigData;
@@ -27,12 +28,9 @@ public class SummerCloudConfigDataLoader implements ConfigDataLoader<SummerCloud
 
     @Override
     public ConfigData load(ConfigDataLoaderContext context, SummerCloudConfigDataResource resource)
-            throws IOException, ConfigDataResourceNotFoundException {
-
+            throws ConfigDataResourceNotFoundException {
         SummerCloudConfigClient summerCloudConfigClient =
                 context.getBootstrapContext().get(SummerCloudConfigClient.class);
-
-
 
         ConfigEntity configEntity = summerCloudConfigClient.getConfig(resource.getFileName());
         SummerCloudRefresher.registryConfigFile(configEntity);
@@ -40,8 +38,6 @@ public class SummerCloudConfigDataLoader implements ConfigDataLoader<SummerCloud
         if (load != null){
             return new ConfigData(load);
         }
-
-
         return null;
     }
 

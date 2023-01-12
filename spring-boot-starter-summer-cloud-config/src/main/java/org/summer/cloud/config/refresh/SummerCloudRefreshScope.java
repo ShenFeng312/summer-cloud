@@ -29,6 +29,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * 用于注册refresh SCOPE 的 bean 对象，会移除原来的BeanDefinition并创建一个scope代理对象 在配置刷新的时候bean 会被刷新
  * @author shenfeng
  */
 @Slf4j

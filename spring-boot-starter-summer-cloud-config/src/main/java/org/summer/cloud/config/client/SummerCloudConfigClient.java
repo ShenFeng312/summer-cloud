@@ -2,6 +2,7 @@ package org.summer.cloud.config.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import org.summer.cloud.common.entity.ConfigEntity;
 import org.summer.cloud.config.SummerCloudConfigProperties;
@@ -30,7 +31,10 @@ public class SummerCloudConfigClient {
 
         String config = restTemplate.getForObject(summerCloudConfigProperties.getUrl() + "/config/" + fileName,
                 String.class);
-        return objectMapper.readValue(config, ConfigEntity.class);
+        if(StringUtils.hasText(config)){
+            return objectMapper.readValue(config, ConfigEntity.class);
+        }
+        return null;
     }
 
     public int getVersion(String fileName) {

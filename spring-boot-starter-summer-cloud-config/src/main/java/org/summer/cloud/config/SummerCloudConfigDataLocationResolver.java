@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.bind.Binder;
 import org.summer.cloud.config.client.SummerCloudConfigClient;
 import org.summer.cloud.config.client.SummerCloudConfigClientFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,7 +27,6 @@ public class SummerCloudConfigDataLocationResolver implements ConfigDataLocation
     public List<SummerCloudConfigDataResource> resolve(ConfigDataLocationResolverContext context,
                                                        ConfigDataLocation location)
             throws ConfigDataLocationNotFoundException, ConfigDataResourceNotFoundException {
-
         String fileName = location.getNonPrefixedValue(PREFIX);
         SummerCloudConfigDataResource summerCloudConfigDataResource = new SummerCloudConfigDataResource();
         summerCloudConfigDataResource.setFileName(fileName);
@@ -72,4 +72,10 @@ public class SummerCloudConfigDataLocationResolver implements ConfigDataLocation
     private BindHandler getBindHandler(ConfigDataLocationResolverContext context) {
         return context.getBootstrapContext().getOrElse(BindHandler.class, null);
     }
+//    @Override
+//    public List<SummerCloudConfigDataResource> resolveProfileSpecific(ConfigDataLocationResolverContext context,
+//             ConfigDataLocation location,
+//            Profiles profiles) throws ConfigDataLocationNotFoundException {
+//        return Collections.emptyList();
+//    }
 }
