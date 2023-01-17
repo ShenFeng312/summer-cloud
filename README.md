@@ -1,9 +1,14 @@
+
+
 # SUMMER-CLOUD
 一个自娱自乐的项目 从头开始写一个框架 主要为了自己温习,同时也方便其他同学学习
 # Build from Source
 需要JDK11(后面会升级为JDK17 因为是自己玩的)  
 该项目基于springboot2.7.2(后面会升级为3 因为是自己玩的)  
 执行 `mvn clean install -DskipTests` 构建项目
+## 功能列表
+[配置中心](#配置中心)  
+[远程调用](#远程调用)
 
 # 配置中心
 支持配置中心客户端服务端  
@@ -55,7 +60,7 @@ summer:
 ```
 目前配置文件不持久化到磁盘和数据库 如有需求请自己实现 代码很简单
 
-# RPC调用
+# 远程调用
 目前只实现了基于http的rpc 远程调用
 依赖
 ```xml
@@ -80,26 +85,4 @@ public class DemoServiceImpl implements DemoService {
 ```java
 	@SummerCloudResource(host = "http://localhost:9090")
 	DemoService demoService;
-```
-## filter
-需要实现`org.summer.cloud.rpc.Filter`直接注入容器即可
-```java
-@Component
-public class TestFilter implements Filter {
-	@Override
-	public Response invoke(Invoker invoker, Request request) {
-		System.out.println("test filter invoke");
-		return invoker.invoke(request);
-	}
-
-	@Override
-	public boolean isConsumer() {
-		return true;
-	}
-
-	@Override
-	public boolean isProvider() {
-		return true;
-	}
-}
 ```
