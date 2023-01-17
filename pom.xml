@@ -29,6 +29,8 @@
         <module>summer-cloud-config-server</module>
         <module>spring-boot-starter-summer-cloud-config</module>
         <module>summer-cloud-common</module>
+        <module>summer-cloud-rpc</module>
+        <module>spring-boot-starter-summer-cloud-rpc-http</module>
     </modules>
 
 
