@@ -81,3 +81,25 @@ public class DemoServiceImpl implements DemoService {
 	@SummerCloudResource(host = "http://localhost:9090")
 	DemoService demoService;
 ```
+## filter
+需要实现`org.summer.cloud.rpc.Filter`直接注入容器即可
+```java
+@Component
+public class TestFilter implements Filter {
+	@Override
+	public Response invoke(Invoker invoker, Request request) {
+		System.out.println("test filter invoke");
+		return invoker.invoke(request);
+	}
+
+	@Override
+	public boolean isConsumer() {
+		return true;
+	}
+
+	@Override
+	public boolean isProvider() {
+		return true;
+	}
+}
+```
