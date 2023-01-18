@@ -20,9 +20,10 @@ public class HttpRpcAutoConfiguration {
 	FilterManager filterManager() {
 		return new FilterManagerImpl();
 	}
+
 	@ConditionalOnMissingBean
 	@Bean
-	public HttpRequestController httpRequestController(){
+	public HttpRequestController httpRequestController() {
 		return new HttpRequestController();
 	}
 

@@ -16,7 +16,7 @@ public class SummerCloudConfigClient {
     SummerCloudConfigProperties summerCloudConfigProperties;
     ObjectMapper objectMapper = new ObjectMapper();
 
-    private List<String> fileList = new ArrayList<>();
+    private final List<String> fileList = new ArrayList<>();
 
     protected SummerCloudConfigClient(SummerCloudConfigProperties summerCloudConfigProperties) {
         this.restTemplate = new RestTemplate();

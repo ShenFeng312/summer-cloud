@@ -64,17 +64,17 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 			Class<?> type = beanFactory.getType(beanDefinitionName);
 			ReflectionUtils.doWithFields(type, field -> {
 				SummerCloudResource annotation = field.getAnnotation(SummerCloudResource.class);
-				if(annotation != null && !classSet.contains(field.getType())){
+				if (annotation != null && !classSet.contains(field.getType())) {
 					RootBeanDefinition beanDefinition = new RootBeanDefinition();
-					beanDefinition.setAttribute("interface",field.getType());
+					beanDefinition.setAttribute("interface", field.getType());
 					beanDefinition.setBeanClass(HttpProxyConsumerFactory.class);
-					beanDefinition.setAttribute("host",annotation.host());
+					beanDefinition.setAttribute("host", annotation.host());
 					GenericBeanDefinition targetDefinition = new GenericBeanDefinition();
 					targetDefinition.setBeanClass(field.getType());
-					String beanName =  new DefaultBeanNameGenerator().generateBeanName(beanDefinition,
+					String beanName = new DefaultBeanNameGenerator().generateBeanName(beanDefinition,
 							beanDefinitionRegistry);
 					beanDefinition.setDecoratedDefinition(new BeanDefinitionHolder(targetDefinition, beanName + "_decorated"));
-					beanDefinitionRegistry.registerBeanDefinition(beanName,beanDefinition);
+					beanDefinitionRegistry.registerBeanDefinition(beanName, beanDefinition);
 					classSet.add(field.getType());
 				}
 			});
@@ -93,11 +93,9 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 		InjectionMetadata metadata = findSummerCloudResourceMetadata(beanName, bean.getClass(), pvs);
 		try {
 			metadata.inject(bean, beanName, pvs);
-		}
-		catch (BeanCreationException ex) {
+		} catch (BeanCreationException ex) {
 			throw ex;
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			throw new BeanCreationException(beanName, "Injection of autowired dependencies failed", ex);
 		}
 		return pvs;
@@ -123,7 +121,7 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 		return metadata;
 	}
 
-	private  InjectionMetadata buildSummerCloudResourceMetadata(Class<?> clazz) {
+	private InjectionMetadata buildSummerCloudResourceMetadata(Class<?> clazz) {
 		if (!AnnotationUtils.isCandidateClass(clazz, SummerCloudResource.class)) {
 			return InjectionMetadata.EMPTY;
 		}
@@ -143,35 +141,35 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 						}
 						return;
 					}
-//					boolean required = determineRequiredStatus(ann);
+					//					boolean required = determineRequiredStatus(ann);
 					currElements.add(new SummerCloudResourceBeanDefinitionPostProcessor.AutowiredFieldElement(field, true));
 				}
 			});
 
-//			ReflectionUtils.doWithLocalMethods(targetClass, method -> {
-//				Method bridgedMethod = BridgeMethodResolver.findBridgedMethod(method);
-//				if (!BridgeMethodResolver.isVisibilityBridgeMethodPair(method, bridgedMethod)) {
-//					return;
-//				}
-//				MergedAnnotation<?> ann = findSummerCloudResourceAnnotation(bridgedMethod);
-//				if (ann != null && method.equals(ClassUtils.getMostSpecificMethod(method, clazz))) {
-//					if (Modifier.isStatic(method.getModifiers())) {
-////						if (logger.isInfoEnabled()) {
-////							logger.info("Autowired annotation is not supported on static methods: " + method);
-////						}
-//						return;
-//					}
-//					if (method.getParameterCount() == 0) {
-////						if (logger.isInfoEnabled()) {
-////							logger.info("Autowired annotation should only be used on methods with parameters: " +
-////									method);
-////						}
-//					}
-////					boolean required = determineRequiredStatus(ann);
-//					PropertyDescriptor pd = BeanUtils.findPropertyForMethod(bridgedMethod, clazz);
-//					currElements.add(new AutowiredAnnotationBeanPostProcessor.AutowiredMethodElement(method, true, pd));
-//				}
-//			});
+			//			ReflectionUtils.doWithLocalMethods(targetClass, method -> {
+			//				Method bridgedMethod = BridgeMethodResolver.findBridgedMethod(method);
+			//				if (!BridgeMethodResolver.isVisibilityBridgeMethodPair(method, bridgedMethod)) {
+			//					return;
+			//				}
+			//				MergedAnnotation<?> ann = findSummerCloudResourceAnnotation(bridgedMethod);
+			//				if (ann != null && method.equals(ClassUtils.getMostSpecificMethod(method, clazz))) {
+			//					if (Modifier.isStatic(method.getModifiers())) {
+			////						if (logger.isInfoEnabled()) {
+			////							logger.info("Autowired annotation is not supported on static methods: " + method);
+			////						}
+			//						return;
+			//					}
+			//					if (method.getParameterCount() == 0) {
+			////						if (logger.isInfoEnabled()) {
+			////							logger.info("Autowired annotation should only be used on methods with parameters: " +
+			////									method);
+			////						}
+			//					}
+			////					boolean required = determineRequiredStatus(ann);
+			//					PropertyDescriptor pd = BeanUtils.findPropertyForMethod(bridgedMethod, clazz);
+			//					currElements.add(new AutowiredAnnotationBeanPostProcessor.AutowiredMethodElement(method, true, pd));
+			//				}
+			//			});
 
 			elements.addAll(0, currElements);
 			targetClass = targetClass.getSuperclass();
@@ -181,20 +179,20 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 		return InjectionMetadata.forElements(elements, clazz);
 	}
 
-	private  MergedAnnotation<?> findSummerCloudResourceAnnotation(AccessibleObject ao) {
+	private MergedAnnotation<?> findSummerCloudResourceAnnotation(AccessibleObject ao) {
 		MergedAnnotations annotations = MergedAnnotations.from(ao);
-			MergedAnnotation<?> annotation = annotations.get(SummerCloudResource.class);
-			if (annotation.isPresent()) {
-				return annotation;
-			}
-			return null;
+		MergedAnnotation<?> annotation = annotations.get(SummerCloudResource.class);
+		if (annotation.isPresent()) {
+			return annotation;
+		}
+		return null;
 	}
 
 	private void registerDependentBeans(@Nullable String beanName, Set<String> autowiredBeanNames) {
 		if (beanName != null) {
 			for (String autowiredBeanName : autowiredBeanNames) {
 				if (this.app != null && this.app.containsBean(autowiredBeanName)) {
-					((ConfigurableListableBeanFactory)this.app.getAutowireCapableBeanFactory()).registerDependentBean(autowiredBeanName, beanName);
+					((ConfigurableListableBeanFactory) this.app.getAutowireCapableBeanFactory()).registerDependentBean(autowiredBeanName, beanName);
 				}
 				if (log.isTraceEnabled()) {
 					log.trace("Autowiring by type from bean name '" + beanName +
@@ -210,8 +208,7 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 			DependencyDescriptor descriptor = (DependencyDescriptor) cachedArgument;
 			Assert.state(this.app != null, "No BeanFactory available");
 			return this.app.getAutowireCapableBeanFactory().resolveDependency(descriptor, beanName, null, null);
-		}
-		else {
+		} else {
 			return cachedArgument;
 		}
 	}
@@ -238,13 +235,11 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 			if (this.cached) {
 				try {
 					value = resolvedCachedArgument(beanName, this.cachedFieldValue);
-				}
-				catch (NoSuchBeanDefinitionException ex) {
+				} catch (NoSuchBeanDefinitionException ex) {
 					// Unexpected removal of target bean for cached argument -> re-resolve
 					value = resolveFieldValue(field, bean, beanName);
 				}
-			}
-			else {
+			} else {
 				value = resolveFieldValue(field, bean, beanName);
 			}
 			if (value != null) {
@@ -264,8 +259,7 @@ public class SummerCloudResourceBeanDefinitionPostProcessor implements BeanFacto
 			Object value;
 			try {
 				value = app.getAutowireCapableBeanFactory().resolveDependency(desc, beanName, autowiredBeanNames, typeConverter);
-			}
-			catch (BeansException ex) {
+			} catch (BeansException ex) {
 				throw new UnsatisfiedDependencyException(null, beanName, new InjectionPoint(field), ex);
 			}
 			synchronized (this) {
