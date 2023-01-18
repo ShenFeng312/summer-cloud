@@ -6,6 +6,7 @@ import lombok.Setter;
 public class ResponseImpl implements Response {
 	private Object result;
 	private Throwable throwable;
+
 	@Override
 	public Object getResult() {
 		return this.result;

@@ -2,8 +2,8 @@ spring:
   application:
     name: config_demo
   config:
-    import: summer-cloud:${spring.application.name}.yaml
+    import: summer-cloud:${spring.application.name}.yaml #需要导入的配置文件，格式为summer-cloud:fileName
 summer:
   cloud:
     config:
-      url: http://localhost:1106
+      url: http://localhost:1106  #配置中心服务器地址

@@ -6,6 +6,7 @@ package org.summer.cloud.rpc;
 public interface Invoker {
 	/**
 	 * 发起请求
+	 *
 	 * @param request request
 	 * @return result
 	 */

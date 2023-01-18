@@ -5,10 +5,9 @@ package org.summer.cloud.rpc;
  */
 public interface FilterChain {
 	/**
-	 *
 	 * @param invoker invoker
 	 * @param request request
 	 * @return result
 	 */
-	Response invoke(Invoker invoker,Request request);
+	Response invoke(Invoker invoker, Request request);
 }

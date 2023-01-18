@@ -14,6 +14,7 @@ import java.util.Map;
 public class FilterManagerImpl implements FilterManager, ApplicationContextAware {
 	private final List<Filter> consumerFilters = new ArrayList<>();
 	private final List<Filter> providerFilters = new ArrayList<>();
+
 	@Override
 	public List<Filter> getConsumerFilter() {
 		return consumerFilters;
@@ -26,10 +27,10 @@ public class FilterManagerImpl implements FilterManager, ApplicationContextAware
 
 	@Override
 	public void register(Filter filter) {
-		if(filter.isConsumer()){
+		if (filter.isConsumer()) {
 			consumerFilters.add(filter);
 		}
-		if(filter.isProvider()){
+		if (filter.isProvider()) {
 			providerFilters.add(filter);
 		}
 	}

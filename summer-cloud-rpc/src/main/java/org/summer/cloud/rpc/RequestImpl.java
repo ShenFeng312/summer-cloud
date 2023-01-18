@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class RequestImpl implements Request {
 
-	private final Map<String,String> headers = new HashMap<>();
+	private final Map<String, String> headers = new HashMap<>();
 
 	private Object[] args;
 
@@ -33,7 +33,7 @@ public class RequestImpl implements Request {
 
 	@Override
 	public void addHeader(String key, String value) {
-		headers.put(key,value);
+		headers.put(key, value);
 	}
 
 	@Override
